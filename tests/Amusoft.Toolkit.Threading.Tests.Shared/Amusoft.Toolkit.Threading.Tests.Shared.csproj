@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!--https://stackoverflow.com/questions/48896443/an-assembly-specified-in-the-application-dependencies-manifest-was-not-fou-->
+    <IsTestProject>false</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
+    <PackageReference Include="Verify.Xunit" Version="26.1.6" />
+    <PackageReference Include="xunit" Version="2.9.0" />
+    <PackageReference Include="NLog" Version="4.7.11"/>
+    <PackageReference Include="Shouldly" Version="3.0.2"/>
+    <PackageReference Include="Amusoft.XUnit.NLog.Extensions" Version="2.4.7-alpha.88"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="**\*.shared.cs" />
+    <None Include="**\*.shared.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Amusoft.Toolkit.Threading\Amusoft.Toolkit.Threading.csproj"/>
+  </ItemGroup>
+
+</Project>

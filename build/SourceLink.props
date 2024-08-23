@@ -1,0 +1,13 @@
+﻿<Project>
+	<PropertyGroup>
+		<!-- https://devblogs.microsoft.com/dotnet/producing-packages-with-source-link/ -->
+
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<!-- https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/code-generation#debugtype -->
+		<DebugType>portable</DebugType>
+		<IncludeSymbols Condition=" '$(DebugType)' != 'embedded' ">true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<DebugSymbols>true</DebugSymbols>
+	</PropertyGroup>
+</Project>

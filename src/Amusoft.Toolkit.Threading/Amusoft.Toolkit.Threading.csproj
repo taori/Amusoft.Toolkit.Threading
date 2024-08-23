@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;netstandard2.0</TargetFrameworks>
+		<LangVersion>10.0</LangVersion>
+		<IsPackable>true</IsPackable>
+
+		<Title>Amusoft.Toolkit.Threading</Title>
+		<Description>Amusoft.Toolkit.Threading</Description>
+		<PackageId>Amusoft.Toolkit.Threading</PackageId>
+		<Product>Amusoft.Toolkit.Threading</Product>
+		<PackageReleaseNotes>
+			lorem ipsum
+		</PackageReleaseNotes>
+		<PackageTags>TODO</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Threading.UnitTests"/>
+		<InternalsVisibleTo Include="Amusoft.Toolkit.Threading.IntegrationTests"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" PrivateAssets="all"/>
+	</ItemGroup>
+</Project>

@@ -1,0 +1,34 @@
+﻿<Project>
+	<PropertyGroup>
+		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionSuffix>alpha</VersionSuffix>
+		<Copyright>Copyright © Amusoft 2024</Copyright>
+		<Authors>https://github.com/taori/Amusoft.Toolkit.Threading/graphs/contributors</Authors>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Nullable>Enable</Nullable>
+		<IsTestProject>false</IsTestProject>		
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/taori/Amusoft.Toolkit.Threading.git</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/taori/Amusoft.Toolkit.Threading</PackageProjectUrl>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<NoWarn>MSB3243;NU1801</NoWarn>
+		<WarningsAsErrors>CS1591</WarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageIcon>Resources\packageIcon.png</PackageIcon>
+		<PackageReadmeFile>Resources\README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup Condition="'$(IsPackable)' == 'True'">
+		<None Include="..\..\README.md" Pack="True" PackagePath="\Resources"/>
+		<None Include="..\packageIcon.png" Pack="True" PackagePath="\Resources"/>
+	</ItemGroup>
+</Project>
