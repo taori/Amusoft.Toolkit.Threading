@@ -12,4 +12,4 @@ This is an abstract implementation of the AmbientScope pattern, which allows you
 One scenario where this can be used is for passing data to subsequently called methods, without forwarding them to methods or constructors.
 
 ### Samples
-See [Tests](https://github.com/taori/Amusoft.Toolkit.Threading/blob/main/tests/Amusoft.Toolkit.Threading.UnitTests/AmbientScopeTests.cs) for comprehensive examples
+See [Tests](https://github.com/taori/Amusoft.Toolkit.Threading/blob/main/tests/Amusoft.Toolkit.Threading.UnitTests/Tests/AmbientScopeTests.cs) for comprehensive examples
