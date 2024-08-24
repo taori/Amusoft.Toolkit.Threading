@@ -18,7 +18,16 @@
 [![NuGet version (Amusoft.Toolkit.Threading)](https://img.shields.io/nuget/vpre/Amusoft.Toolkit.Threading.svg)](https://www.nuget.org/packages/Amusoft.Toolkit.Threading/latest/prerelease)
 
 <!--CoverageStart-->
-Coverage state not available yet.
+![Code Coverage](https://img.shields.io/badge/Code%20Coverage-100%25-success?style=flat)
+
+Package | Line Rate | Branch Rate | Health
+-------- | --------- | ----------- | ------
+Amusoft.Toolkit.Threading | 100% | 90% | ✔
+**Summary** | **100%** (86 / 86) | **90%** (36 / 40) | ✔
+
+_Minimum allowed line rate is 85%_
+
+[Coverage details](https://taori.github.io/Amusoft.Toolkit.Threading)
 <!--CoverageEnd-->
 
 ## Description
