@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,21 +8,8 @@ using Amusoft.Toolkit.Threading.Exceptions;
 
 namespace Amusoft.Toolkit.Threading;
 
-
-internal class IdentityComparer : IEqualityComparer<LoaderIdentity>
-{
-	public bool Equals(LoaderIdentity? x, LoaderIdentity? y)
-	{
-		return x?.Equals(y) ?? false;
-	}
-
-	public int GetHashCode(LoaderIdentity obj)
-	{
-		return obj.GetHashCode();
-	}
-}
 /// <summary>
-/// 
+/// Debouncing API
 /// </summary>
 public class Debouncer
 {
@@ -32,7 +18,7 @@ public class Debouncer
 	private static readonly ConditionalWeakTable<DebounceStack, LoaderIdentity> IdOfStack = new();
 	
 	/// <summary>
-	/// 
+	/// ensures that the last call with a given identity will provide the result for all awaiting tasks
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
@@ -59,36 +45,4 @@ public class Debouncer
 		
 		return await stack.Task;
 	}
-}
-
-/// <summary>
-/// 
-/// </summary>
-/// <typeparam name="T"></typeparam>
-internal class DebounceStack<T> : DebounceStack
-{
-	private readonly TaskCompletionSource<T> _tcs = new();
-	private CancellationTokenSource? _cts = new();
-	private Task<T>? _loader;
-
-	/// <summary>
-	/// 
-	/// </summary>
-	internal Task<T> Task => _tcs.Task;
-
-	internal void CancelAndUpdate(Func<CancellationToken, Task<T>> expression)
-	{
-		_cts?.Cancel(false);
-		_cts?.Dispose();
-		_cts = new();
-		_loader = expression(_cts.Token);
-		_loader.ContinueWith(r => _tcs.SetResult(r.Result));
-	}
-}
-
-/// <summary>
-/// 
-/// </summary>
-public abstract class DebounceStack
-{
 }
