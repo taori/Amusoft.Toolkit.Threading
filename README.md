@@ -1,5 +1,15 @@
 # Amusoft.Toolkit.Threading
 
+## Features
+
+| Feature                              | Kind                            |
+|--------------------------------------|---------------------------------|
+| [Debouncer](docs/Debouncer.md)       | Task result flow utility class  |
+| [AmbientScope](docs/AmbientScope.md) | Abstract pattern implementation |
+
+
+
+
 ## Project state
 
 [![.GitHub](https://github.com/taori/Amusoft.Toolkit.Threading/actions/workflows/CI.yml/badge.svg)](https://github.com/taori/Amusoft.Toolkit.Threading/actions/workflows/CI.yml)

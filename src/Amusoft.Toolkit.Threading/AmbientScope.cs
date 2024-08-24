@@ -15,25 +15,25 @@ namespace Amusoft.Toolkit.Threading;
 public abstract class AmbientScope<T> : IDisposable
 	where T: AmbientScope<T>
 {
-	private static readonly AsyncLocal<Stack<T>> Scopes = new()
+	private static readonly AsyncLocal<Stack<T>> GlobalScopes = new()
 	{
 		Value = new Stack<T>()
 	};
 
 	// ReSharper disable once InconsistentNaming
-	private static readonly AsyncLocal<T?> _current = new ();
+	private static readonly AsyncLocal<T?> GlobalCurrent = new ();
 	
 	/// <summary>
 	/// Current ambient instance
 	/// </summary>
-	public static T? Current => _current.Value;
+	public static T? Current => GlobalCurrent.Value;
 
-	private readonly AsyncLocal<T?> _parentScope = new();
+	private readonly AsyncLocal<T?> _localParentScope = new();
 	
 	/// <summary>
 	/// Parent scope of current scope
 	/// </summary>
-	public T? ParentScope => _parentScope.Value;
+	public T? ParentScope => _localParentScope.Value;
 
 	/// <summary>
 	/// Parent scopes of current scope
@@ -43,13 +43,13 @@ public abstract class AmbientScope<T> : IDisposable
 		var current = this;
 		while (current != null)
 		{
-			if (current.ParentScope == null || current._parentScope.Value == null)
+			if (current.ParentScope == null || current._localParentScope.Value == null)
 				break;
 
-			if (continueCondition?.Invoke(current._parentScope.Value) ?? true)
+			if (continueCondition?.Invoke(current._localParentScope.Value) ?? true)
 			{
-				yield return current._parentScope.Value;
-				current = current._parentScope.Value;
+				yield return current._localParentScope.Value;
+				current = current._localParentScope.Value;
 			}
 		}
 	}
@@ -59,35 +59,31 @@ public abstract class AmbientScope<T> : IDisposable
 	/// </summary>
 	protected AmbientScope()
 	{
-		if (_current.Value != null)
+		if (GlobalCurrent.Value != null)
 		{
-			_parentScope.Value = _current.Value;
+			_localParentScope.Value = GlobalCurrent.Value;
 		}
 
-		if (Scopes.Value == null)
-			Scopes.Value = new Stack<T>();
+		if (GlobalScopes.Value == null)
+			GlobalScopes.Value = new Stack<T>();
 
 		if (this is T c)
-			Scopes.Value.Push(c);
+			GlobalScopes.Value.Push(c);
 		ChangeCurrentScope(this as T);
 	}
 
 	private void ChangeCurrentScope(T? scope)
 	{
-		if (_current.Value == null)
+		if (GlobalCurrent.Value == null)
 		{
 			if (scope is not null)
 			{
-				_current.Value = scope;
-			}
-			else
-			{
-				_current.Value = null;
+				GlobalCurrent.Value = scope;
 			}
 		}
 		else
 		{
-			_current.Value = scope;
+			GlobalCurrent.Value = scope;
 		}
 	}
 
@@ -113,13 +109,9 @@ public abstract class AmbientScope<T> : IDisposable
 
 		if (disposing)
 		{
-			if (Scopes.Value!.TryPop(out var scope))
+			if (GlobalScopes.Value!.TryPop(out var scope))
 			{
 				ChangeCurrentScope(scope.ParentScope);
-			}
-			else
-			{
-				ChangeCurrentScope(null);
 			}
 		}
 

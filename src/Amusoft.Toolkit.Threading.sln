@@ -28,6 +28,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2A0EE9FD-7EB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8707028A-01D0-4FA0-9E18-42CCE8FB5B49}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{90BE264F-FB16-42C1-A9C1-9002CA938148}"
+	ProjectSection(SolutionItems) = preProject
+		..\docs\Debouncer.md = ..\docs\Debouncer.md
+		..\docs\AmbientScope.md = ..\docs\AmbientScope.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,5 +104,6 @@ Global
 		{84DE93C0-2F90-4060-B96D-6349BFC017E3} = {8707028A-01D0-4FA0-9E18-42CCE8FB5B49}
 		{650D7E93-1F29-486F-9DA6-EF59337E46CB} = {8707028A-01D0-4FA0-9E18-42CCE8FB5B49}
 		{C9167A64-A858-4D35-B63B-270871B1FB80} = {2A0EE9FD-7EB7-477E-B086-4E91F65A451C}
+		{90BE264F-FB16-42C1-A9C1-9002CA938148} = {8CB3D4AF-4E1A-473F-BB81-ECC9F7DF2BAD}
 	EndGlobalSection
 EndGlobal
