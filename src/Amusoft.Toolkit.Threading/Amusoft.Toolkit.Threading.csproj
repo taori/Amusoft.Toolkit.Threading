@@ -9,9 +9,9 @@
 		<PackageId>Amusoft.Toolkit.Threading</PackageId>
 		<Product>Amusoft.Toolkit.Threading</Product>
 		<PackageReleaseNotes>
-			lorem ipsum
+			Ambient Scope + Debouncer
 		</PackageReleaseNotes>
-		<PackageTags>TODO</PackageTags>
+		<PackageTags>ambient scope, threading, threads, tasks, thread, task</PackageTags>
 	</PropertyGroup>
 
 	<ItemGroup>
