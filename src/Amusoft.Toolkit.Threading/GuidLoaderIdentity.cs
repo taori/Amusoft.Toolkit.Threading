@@ -32,4 +32,13 @@ public class GuidLoaderIdentity : LoaderIdentity
 			return guid.Id == Id;
 		return false;
 	}
+
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns></returns>
+	public override int GetHashCode()
+	{
+		return Id.GetHashCode();
+	}
 }

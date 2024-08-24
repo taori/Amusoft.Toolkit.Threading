@@ -1,0 +1,10 @@
+﻿{
+  Type: TypeMismatchException,
+  Actual: DebounceStack<string>,
+  Expected: DebounceStack<int>,
+  Identity: {
+    Id: Guid_1
+  },
+  Message: Exception of type 'Amusoft.Toolkit.Threading.Exceptions.TypeMismatchException' was thrown.,
+  StackTrace: {Scrubbed}
+}

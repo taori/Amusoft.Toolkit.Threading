@@ -1,18 +1,33 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Amusoft.Toolkit.Threading.Compat;
+using Amusoft.Toolkit.Threading.Exceptions;
 
 namespace Amusoft.Toolkit.Threading;
 
+
+internal class IdentityComparer : IEqualityComparer<LoaderIdentity>
+{
+	public bool Equals(LoaderIdentity? x, LoaderIdentity? y)
+	{
+		return x?.Equals(y) ?? false;
+	}
+
+	public int GetHashCode(LoaderIdentity obj)
+	{
+		return obj.GetHashCode();
+	}
+}
 /// <summary>
 /// 
 /// </summary>
 public class Debouncer
 {
-	private static readonly ConcurrentDictionary<LoaderIdentity, DebounceStack> Stacks = new();
+	private static readonly ConcurrentDictionary<LoaderIdentity, DebounceStack> Stacks = new(new IdentityComparer());
 
 	private static readonly ConditionalWeakTable<DebounceStack, LoaderIdentity> IdOfStack = new();
 	
@@ -21,7 +36,7 @@ public class Debouncer
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	/// <returns></returns>
-	public static Task<T> FromStackAsync<T>(Func<CancellationToken, Task<T>> expression, LoaderIdentity identity)
+	public static async Task<T> FromStackAsync<T>(Func<CancellationToken, Task<T>> expression, LoaderIdentity identity)
 	{
 		var current = Stacks.GetOrAdd(identity,
 			loaderIdentity =>
@@ -29,8 +44,8 @@ public class Debouncer
 				var newStack = new DebounceStack<T>();
 				newStack.Task.ContinueWith(_ =>
 					{
-						Stacks.TryRemove(loaderIdentity, out var prevStack);
-						IdOfStack.Remove(prevStack);
+						if (Stacks.TryRemove(loaderIdentity, out var prevStack))
+							IdOfStack.Remove(prevStack);
 					}
 				);
 				IdOfStack.Add(newStack, loaderIdentity);
@@ -38,11 +53,11 @@ public class Debouncer
 			});
 
 		if (current is not DebounceStack<T> stack)
-			throw new Exception($"Task is expected to be of type {typeof(DebounceTask<T>).FullName} but isn't. Check the identity you are using for accidentally similarities");
+			throw new TypeMismatchException(current.GetType(), typeof(DebounceStack<T>), identity);
 
 		stack.CancelAndUpdate(expression);
 		
-		return stack.Task;
+		return await stack.Task;
 	}
 }
 
