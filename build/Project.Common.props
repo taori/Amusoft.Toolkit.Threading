@@ -1,6 +1,6 @@
 ﻿<Project>
 	<PropertyGroup>
-		<VersionPrefix>1.0.1</VersionPrefix>
+		<VersionPrefix>1.0.2</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Copyright>Copyright © Amusoft 2024</Copyright>
 		<Authors>https://github.com/taori/Amusoft.Toolkit.Threading/graphs/contributors</Authors>
