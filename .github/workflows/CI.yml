@@ -117,11 +117,11 @@ jobs:
               @("configuration",      "${{github.event.inputs.configuration}}",       "Release"),
               @("verbosity",          "${{github.event.inputs.verbosity}}",           "minimal"),
               @("publish",            "${{github.event.inputs.publish}}",             "true"),
-              @("package",            "${{github.event.inputs.package}}",             "true"),
-              @("publishSymbols",     "${{github.event.inputs.publishSymbols}}",      "true"),
+              @("package",            "true",                                         "true"),
+              @("publishSymbols",     "true",                                         "true"),
               @("removePrereleases",  "${{github.event.inputs.removePrereleases}}",   "false"),
-              @("skipTests",          "${{github.event.inputs.skipTests}}",           "false"),
-              @("runCoverage",        "${{github.event.inputs.runCoverage}}",         "true")
+              @("skipTests",          "false",                                        "false"),
+              @("runCoverage",        "true",                                         "true")
           )
           
           $manual = $('${{github.event_name}}' -eq 'workflow_dispatch')
