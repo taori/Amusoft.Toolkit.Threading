@@ -1,6 +1,8 @@
 name: CI
 
 permissions: 
+  pages:
+    write
   contents: 
     write
   pull-requests: 
